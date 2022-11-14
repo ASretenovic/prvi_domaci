@@ -75,7 +75,7 @@
             <br>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> 
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="dashboard.php"><i class="fa fa-home"></i>Početna</a>
+                    <a class="nav-link active" aria-current="page" href="pocetna.php"><i class="fa fa-home"></i>Početna</a>
 
                     <!-- Odjavi se -->
                     <?php
@@ -144,7 +144,7 @@
                         <p class="card-text">Rad sa kategorijama.</p>
         
                         <a href="#" data-toggle="modal" data-target="#form_category" class="btn btn-primary button">Dodaj</a>
-                        <a href="#" class="btn btn-primary button">Izmeni</a>
+                        <a href="templates/upravljanje_kategorijom.php" class="btn btn-primary button">Izmeni</a>
                     </div>
                 </div>
             </div>
@@ -164,6 +164,10 @@
         </div>
     </div>
 
+
+    <?php
+        include_once("./templates/nova_kategorija.php");
+    ?>
 
 </body>
 </html>

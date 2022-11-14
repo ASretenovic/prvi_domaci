@@ -36,5 +36,46 @@ $( document ).ready(function() {
     
 
 
+
+// ------------------------------------- Kategorija ------------------------------------------------------------
+
+    // Nova kategorija
+    $("#category_form").on("submit",function(){
+        if($("#category_name").val() == ""){
+            $("#category_name").addClass("border-ranger");
+            $("#cat_error").html("<span class='text-danger'>Unesite naziv kategorije!</span>");
+        }else{
+            $.ajax({
+                url: DOMAIN + "/handler/process.php",
+                method: "POST",
+                data: $("#category_form").serialize(),
+                success: function(data){
+                    if(data == "CATEGORY_ADDED"){
+                        $("#category_name").removeClass("border-ranger");
+                        $("#cat_error").html("<span class='text-success'>Kategorija je uspešno dodata.</span>");
+                        $("#category_name").val("");
+                    } else{
+                        alert(data);
+                    }
+                }
+            })
+        }
+    })
+
+
+    // Tabelarni prikaz svih kategorija
+    manageCategory();
+    function manageCategory(){
+        $.ajax({
+            url: DOMAIN + "/handler/process.php",
+            method: "POST",
+                data: {manageCategory:1},
+                success: function(data){
+                    $("#get_category").html(data);
+                }
+        }) 
+    }
+   
+
     
 })
