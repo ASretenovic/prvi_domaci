@@ -16,7 +16,7 @@ if(!isset($_SESSION["id"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gardening World</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -25,11 +25,11 @@ if(!isset($_SESSION["id"])){
     <script src = "../js/main.js"></script>
     <script src = "../js/manage.js"></script>
     
-
+        
     <style>
         body{
         background-color: #75CE9F;
-      }
+        }
 
       .navbar{
         background-color: #01A66F;
@@ -48,12 +48,11 @@ if(!isset($_SESSION["id"])){
         margin-top: 5%;
       }
 
-      #table_category{
+      #table_products{
         background-color: #BDD99E;
       }
 
     </style>
-
 
 </head>
 
@@ -69,7 +68,6 @@ if(!isset($_SESSION["id"])){
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> 
                 <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="../pocetna.php"><i class="fa fa-home"></i>Početna</a>
-                              
                     <?php
                         if(isset($_SESSION["id"])){
                     ?>
@@ -77,31 +75,31 @@ if(!isset($_SESSION["id"])){
                     <?php
                         }
                     ?>
- 
+
+                    
                 </div>
             </div>
         </div>
     </nav>
 
-
-
     <div class="container">
-        <table id="table_category" class="table table-hover table-bordered">
+        <table id="table_products" class="table table-hover table-bordered">
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>Naziv</th>
                     <th>Kategorija</th>
-                    <th>Status</th>
+                    <th>Cena</th>
+                    <th>Količina</th>
                     <th>Akcija</th>
                 </tr>
             </thead>
-            <tbody id="get_category">
+            <tbody id="get_product">
             </tbody>
         </table>
     </div>
 
-
-    <?php include("izmeni_kategoriju.php"); ?>
+    <?php include("izmeni_proizvod.php"); ?>
 
 </body>
 </html>

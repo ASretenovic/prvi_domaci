@@ -133,4 +133,13 @@ class Manage{
 
 
 
+    // Vraca naziv kategorije na osnovu primarnog kljuca
+    public function getCategoryName($cid){
+        $sql = "SELECT k.naziv_kategorije FROM kategorija k LEFT JOIN proizvod p ON k.kid=p.kid WHERE k.kid =".$cid;
+        $result = $this->con->query($sql) or die($this->con->error);
+        $name = $result->fetch_assoc();
+        return $name["naziv_kategorije"];
+    }
+
+
 }

@@ -10,7 +10,7 @@
 
       <div class="modal-body">
     
-      <!-- -------------------------------ISKACUCA FORMA ZA IZMENU KATEGORIJE--------------------------- -->
+      <!-- ------------------------------- Forma za izmenu kategorije ---------------------------- -->
         <form id="update_category_form" onsubmit="return false">
           <div class="form-group">
             <label >Naziv kategorije</label>

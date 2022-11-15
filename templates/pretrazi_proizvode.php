@@ -2,13 +2,7 @@
 
 include("../database/constants.php");
 
-if(!isset($_SESSION["id"])){
-    header("location: ../index.php");
-}
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +20,7 @@ if(!isset($_SESSION["id"])){
     <script src = "../js/manage.js"></script>
     
 
+    
     <style>
         body{
         background-color: #75CE9F;
@@ -45,7 +40,7 @@ if(!isset($_SESSION["id"])){
       }
 
       .container{
-        margin-top: 5%;
+        padding: 5%;
       }
 
       #table_category{
@@ -54,22 +49,19 @@ if(!isset($_SESSION["id"])){
 
     </style>
 
-
 </head>
-
 
 <body>
 
-
-    <!-- Header -->
-    <nav class="navbar">
+<nav class="navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><i class="fa fa-leaf"></i>Gardening world</a>
             <br>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> 
                 <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="../pocetna.php"><i class="fa fa-home"></i>Početna</a>
-                              
+                   
+
                     <?php
                         if(isset($_SESSION["id"])){
                     ?>
@@ -77,7 +69,8 @@ if(!isset($_SESSION["id"])){
                     <?php
                         }
                     ?>
- 
+
+                    
                 </div>
             </div>
         </div>
@@ -85,23 +78,19 @@ if(!isset($_SESSION["id"])){
 
 
 
-    <div class="container">
-        <table id="table_category" class="table table-hover table-bordered">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Kategorija</th>
-                    <th>Status</th>
-                    <th>Akcija</th>
-                </tr>
-            </thead>
-            <tbody id="get_category">
-            </tbody>
-        </table>
+<div class="container">
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">
+            <label>Pretražite proizvode:</label>
+            <br>
+                <input type="text" name="search_text" id="search_text" class="form-control">
+            </div>
+        </div>
     </div>
-
-
-    <?php include("izmeni_kategoriju.php"); ?>
+    <div id="result"></div>
+</div>
+    
 
 </body>
 </html>

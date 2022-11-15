@@ -153,10 +153,10 @@
                 <div class="card" style="margin: 20px 0px;">
                     <div class="card-body" style="text-align: center;">
                         <h3 class="card-title">Upravljaj proizvodima</h3>
-                        <p class="card-text">Rad sa proizvodima..</p>
+                        <p class="card-text">Rad sa proizvodima.</p>
                         <a href="#" class="btn btn-primary button" data-toggle="modal" data-target="#form_products">Dodaj</a>
-                        <a href="#" class="btn btn-primary button">Pregledaj i pretraži</a>
-                        <a href="#" class="btn btn-primary button">Izmeni</a>
+                        <a href="templates/pretrazi_proizvode.php" class="btn btn-primary button">Pregledaj i pretraži</a>
+                        <a href="templates/upravljanje_proizvodima.php" class="btn btn-primary button">Izmeni</a>
                     </div>
                 </div>
             </div>
@@ -167,6 +167,10 @@
 
     <?php
         include_once("./templates/nova_kategorija.php");
+    ?>
+
+    <?php
+        include_once("./templates/novi_proizvod.php");
     ?>
 
 </body>

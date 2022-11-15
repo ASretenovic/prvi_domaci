@@ -11,11 +11,10 @@
 
 
         public function addCategory($name_category){
-            // NE PISI '' KOD NAZIVA TABELE ILI KOLONA
             $prepared_statement = $this->con->prepare("INSERT INTO kategorija(naziv_kategorije,status) 
                                                         VALUES(?,?)" );
             $status = 1;
-            $prepared_statement->bind_param("si", $name_category, $status);   // prvo se unosi name, sto je String(s) a onda status, sto je Enum, tj. int --> si
+            $prepared_statement->bind_param("si", $name_category, $status); 
 
             $result = $prepared_statement->execute() or die($this->con->error);
 
@@ -33,7 +32,6 @@
             $result = $prepared_statement->get_result();
 
             $rows = array();
-            // dodavanje elemenata u niz
             if($result->num_rows > 0){
                 while($row = $result->fetch_assoc()){
                     $rows[] = $row;
@@ -42,6 +40,20 @@
             }
             return "NO_DATA";
 
+        }
+
+
+        public function addProduct($cid,$product_name,$product_price,$product_stock){
+            $prepared_statement = $this->con->prepare("INSERT INTO proizvod(kid,naziv_proizvoda,cena_proizvoda,kolicina) 
+                                                        VALUES(?,?,?,?)" );
+            $prepared_statement->bind_param("isdi", $cid, $product_name,$product_price,$product_stock);   
+            $result = $prepared_statement->execute() or die($this->con->error);
+
+            if($result){
+                return "PRODUCT_ADDED";
+            } else{
+                return 0;
+            }
         }
 
     }

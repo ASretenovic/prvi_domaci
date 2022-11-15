@@ -50,7 +50,7 @@ if(isset($_POST["manageCategory"])){
 }
 
 
-/* TO GET CATEGORY */
+// Ucitavanje svih kategorija u padajucu listu
 if(isset($_POST["getCategory"])){
     $obj = new DBOperations();
     $rows = $obj->getAllRecord("kategorija");
@@ -89,6 +89,78 @@ if(isset($_POST["deleteCategory"])){
     echo $result;
     exit();
 }
+
+
+
+// ----------------------------------------------- Proizvod -------------------------------------------------------
+
+// Dodaj proizvod
+if(isset($_POST["product_name"])){
+    $obj = new DBOperations();
+    $result = $obj->addProduct($_POST["select_cat"],$_POST["product_name"],$_POST["product_price"],$_POST["product_stock"]);
+    echo $result;
+    exit();
+}
+
+
+// Tabelarni prikaz svih proizvoda                    
+if(isset($_POST["manageProducts"])){
+    $m = new Manage();
+    $result = $m->manageRecord("proizvod");
+    $rows = $result;
+
+    if(count($rows) > 0){
+        foreach($rows as $row){
+            ?>
+                <tr>
+                    <td><?php echo $row["pid"] ?></td>
+                    <td><?php echo $row["naziv_proizvoda"]; ?></td>
+                    <td><?php echo $m->getCategoryName($row["kid"]); ?></td>
+                    <td><?php echo $row["cena_proizvoda"]; ?></td>
+                    <td><?php echo $row["kolicina"]; ?></td>
+                    <td>
+                        <a href="#" did = "<?php echo $row["pid"]; ?>" class="btn btn-danger btn-sm del_product">Izbriši</a>
+                        <a href="#" eid = "<?php echo $row["pid"]; ?>" data-toggle="modal" data-target="#form_products" class="btn btn-info btn-sm edit_product">Izmeni</a>
+                    </td>
+                </tr>
+            <?php
+        }
+    }
+}
+
+
+// Izmena proizvoda - selekcija reda u kom se vrse izmene
+if(isset($_POST["updateProduct"])){
+    $m = new Manage();
+    $result = $m->getSingleRecord("proizvod",$_POST["pid"]);
+    echo json_encode($result);
+    exit();
+}
+
+
+// Izmena proizvoda - cuvanje promena
+if(isset($_POST["update_product"])){
+    $m = new Manage();
+    $pid = $_POST["pid"];
+    $cat = $_POST["select_cat"];
+    $name = $_POST["update_product"];
+    $price = $_POST["product_price"];
+    $stock = $_POST["product_stock"];
+    $result = $m->update_record("proizvod",["pid"=>$pid],["naziv_proizvoda"=>$name,"kid"=>$cat,"cena_proizvoda"=>$price,"kolicina"=>$stock]);
+    echo $result;
+    exit();
+}
+
+
+// Brisanje proizvoda
+if(isset($_POST["deleteProduct"])){
+    $m = new Manage();
+    $result = $m->deleteRecord("proizvod",$_POST["pid"]);
+    echo $result;
+    exit();
+}
+
+
 
 
 ?>
