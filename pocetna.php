@@ -120,7 +120,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Nove porudžbine</h4>
                                     <p class="card-text">Rad sa porudžbinama.</p>
-                                    <a href="#" class="btn btn-primary button">Poruči</a>
+                                    <a href="./templates/porudzbina.php" class="btn btn-primary button">Poruči</a>
                                 </div>
                             </div>
                         </div>

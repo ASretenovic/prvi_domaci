@@ -142,4 +142,28 @@ class Manage{
     }
 
 
+
+    // Cuvanje porudzbine u bazi
+    public function storeOrder($order_date,$employee_name,$rows_tqty,$rows_qty,$rows_price,$rows_name ,$sub_total,
+                                $pdv,$net_total,$payment_type){
+
+        $prepared_statement = $this->con->prepare("INSERT INTO porudzbina(zaposleni,datum,
+                                                    sub_total,pdv,neto_total,nacin_placanja) VALUES(?,?,?,?,?,?)");
+        $prepared_statement->bind_param("ssddds",$employee_name,$order_date,$sub_total,$pdv,$net_total,$payment_type);
+        $prepared_statement->execute() or die($this->con->error);
+        $invoice_id = $prepared_statement->insert_id;            
+
+        if($invoice_id != NULL){
+            for($i = 0; $i < count($rows_name) ; $i++){
+                $insert_product_statement = $this->con->prepare("INSERT INTO stavka_porudzbine(porudzbina_id,naziv_proizvoda,
+                                                                cena,kolicina) VALUES(?,?,?,?);");
+                $insert_product_statement->bind_param("isdd",$invoice_id,$rows_name[$i],$rows_price[$i],$rows_qty[$i]);
+                $insert_product_statement->execute() or die($this->con->error);
+        }
+            return "INVOICE_INSERTED";
+        } else{
+            return "INVOICE_INSERT_FAILED";
+        }
+    }
+    
 }

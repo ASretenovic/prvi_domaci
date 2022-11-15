@@ -163,4 +163,70 @@ if(isset($_POST["deleteProduct"])){
 
 
 
+
+// ------------------------------------------------ Porudzbina -----------------------------------------------------
+
+// Prikaz tabele za dodavanje stavki
+if(isset($_POST["getNewOrderItem"])){
+    $db = new DBOperations();
+    $rows = $db->getAllRecord("proizvod");
+?>
+
+    <tr>
+        <td><b class="number">1</b></td>
+        <td>
+            <select name="pid[]" class="form-control form-control-sm pid" required>
+                <option>Izaberite proizvod</option>
+                <?php 
+                    foreach($rows as $row){
+                        ?><option value="<?php echo $row["pid"]; ?>"><?php echo $row["naziv_proizvoda"];?></option>
+                    <?php
+                    }
+                    ?>
+            </select>
+        </td>
+        <td><input type="text" name="tqty[]" class="form-control form-control-sm tqty" readonly></td>
+        <td><input type="text" name="qty[]" class="form-control form-control-sm qty" required></td>
+        <td><input type="text" name="price[]" class="form-control form-control-sm price" readonly ></td>
+        <td><span><input name="pro_name[]" type="hidden" class="form-control form-control-sm pro_name"></span></td>
+        <td>Din.<span class="amount">0</span></td>
+    </tr>
+<?php
+    exit();
+}
+
+
+// Cena i kolicina proizvoda
+if(isset($_POST["getPriceAndQty"])){
+    $m = new Manage();
+    $result = $m->getSingleRecord("proizvod",$_POST["id"]);
+    echo json_encode($result);
+    exit();
+}
+
+
+// Cuvanje porudzbine
+if(isset($_POST["order_date"]) AND isset($_POST["employee_name"])){
+    $order_date = $_POST["order_date"];
+    $employee_name = $_POST["employee_name"];
+
+    // nizovi
+    $rows_tqty = $_POST["tqty"];
+    $rows_qty = $_POST["qty"];
+    $rows_price = $_POST["price"];
+    $rows_name = $_POST["pro_name"];
+    
+    $sub_total = $_POST["sub_total"];
+    $pdv = $_POST["pdv"];
+    $net_total = $_POST["net_total"];
+    $payment_type = $_POST["payment_type"];
+
+    $m = new Manage();
+    $result = $m->storeOrder($order_date,$employee_name,$rows_tqty,$rows_qty,$rows_price,$rows_name ,$sub_total,
+    $pdv,$net_total,$payment_type);
+    echo $result;
+    exit();
+} 
+
+
 ?>

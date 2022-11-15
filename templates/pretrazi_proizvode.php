@@ -61,7 +61,6 @@ include("../database/constants.php");
                 <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="../pocetna.php"><i class="fa fa-home"></i>Početna</a>
                    
-
                     <?php
                         if(isset($_SESSION["id"])){
                     ?>
@@ -69,8 +68,7 @@ include("../database/constants.php");
                     <?php
                         }
                     ?>
-
-                    
+                                        
                 </div>
             </div>
         </div>
